@@ -17,7 +17,11 @@ namespace druhinmukherjee
         [MenuItem("Tools/Folders")]
         public static void Create()
         {
-            CreateDirectories("_Project","Scripts","Art","Prefabs");
+            //CreateDirectories("_GameName","Art","Prefabs","Scripts");
+            const string root = "_GameName";
+            CreateSubFolders(root + "/Art","Animation","Materials","Model","Sprite","Textures");
+            CreateSubFolders(root + "/Scripts", "");
+            CreateSubFolders(root+"/Prefabs","Enemy", "Player","Props", "UI");
             Refresh();
         }
 
@@ -29,5 +33,15 @@ namespace druhinmukherjee
                 CreateDirectory(Path.Combine(fullpath, newDirectory));
             }
         }
+
+        private static void CreateSubFolders(string root, params string[] dir)
+        {
+            var fullpath = Path.Combine(dataPath,root);                             
+            foreach (var newDirectory in dir)                                            
+            {                                                                            
+                CreateDirectory(Path.Combine(fullpath, newDirectory));                   
+            }                                                                            
+        }                                                                                
+        
     }
 }
